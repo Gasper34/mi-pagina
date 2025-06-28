@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Anime del Día</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>🎲 Anime Aleatorio del Día</h1>
-  <div id="anime-card" class="card">Cargando anime...</div>
-  <button onclick="cargarAnime()">🎲 Mostrar otro anime</button>
 
   <div id="filtros">
-  <label for="tipo">Tipo:</label>
-  <select id="tipo">
-    <option value="">Cualquiera</option>
-    <option value="tv">TV</option>
-    <option value="movie">Movie</option>
-    <option value="ova">OVA</option>
-    <option value="special">Special</option>
-    <option value="ona">ONA</option>
-    <option value="music">Music</option>
-  </select>
+    <label for="tipo">Tipo:</label>
+    <select id="tipo">
+      <option value="">Cualquiera</option>
+      <option value="tv">TV</option>
+      <option value="movie">Movie</option>
+      <option value="ova">OVA</option>
+      <option value="special">Special</option>
+      <option value="ona">ONA</option>
+      <option value="music">Music</option>
+    </select>
 
-  <label for="genero">Género:</label>
-  <select id="genero">
-    <option value="">Cualquiera</option>
-    <option value="1">Acción</option>
-    <option value="2">Aventura</option>
-    <option value="4">Comedia</option>
-    <option value="8">Drama</option>
-    <option value="10">Fantasia</option>
-    <option value="22">Romance</option>
-    <option value="24">Sobrenatural</option>
-    <!-- podés agregar más según códigos de género Jikan -->
-  </select>
+    <label for="genero">Género:</label>
+    <select id="genero">
+      <option value="">Cualquiera</option>
+      <option value="1">Acción</option>
+      <option value="2">Aventura</option>
+      <option value="4">Comedia</option>
+      <option value="8">Drama</option>
+      <option value="10">Fantasia</option>
+      <option value="22">Romance</option>
+      <option value="24">Sobrenatural</option>
+    </select>
 
-  <button onclick="cargarAnimeFiltrado()">Buscar Anime</button>
-</div>
+    <button onclick="cargarAnimeFiltrado()">Buscar Anime</button>
+  </div>
+
+  <div id="anime-card" class="card">Cargando anime...</div>
 
   <script src="script.js"></script>
 </body>

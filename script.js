@@ -50,5 +50,4 @@ async function cargarAnimeFiltrado() {
   }
 }
 
-// Cargar uno al principio
-cargarAnimeFiltrado();
+window.addEventListener('load', cargarAnimeFiltrado);
