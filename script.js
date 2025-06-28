@@ -22,6 +22,7 @@ async function cargarAnime() {
       <p><strong>Géneros:</strong> ${anime.genres.map(g => g.name).join(", ")}</p>
       <p><strong>Puntaje:</strong> ${anime.score ?? "N/A"}</p>
       <p>${anime.synopsis?.substring(0, 400) ?? "Sin sinopsis."}...</p>
+      <a href="${anime.url}" target="_blank" rel="noopener noreferrer" class="mal-button">Ver en MyAnimeList</a>
     `;
   } catch (error) {
     card.innerHTML = "Error al cargar el anime 😢";
