@@ -4,14 +4,15 @@ async function cargarAnimeFiltrado() {
 
   const urlBase = "https://api.jikan.moe/v4/anime";
 
-  // Armar query params para la API
-  const params = new URLSearchParams({
-    type: tipo || undefined,
-    genres: genero || undefined,
-    order_by: "popularity",
-    sort: "desc",
-    limit: 25 // traer hasta 25 animes
-  });
+  // Armar query params para la API, solo si no están vacíos
+  const params = new URLSearchParams();
+
+  if (tipo) params.append("type", tipo);
+  if (genero) params.append("genres", genero);
+
+  params.append("order_by", "popularity");
+  params.append("sort", "desc");
+  params.append("limit", 25);
 
   const url = `${urlBase}?${params.toString()}`;
 
@@ -27,8 +28,7 @@ async function cargarAnimeFiltrado() {
       return;
     }
 
-    // Elegir uno aleatorio del resultado filtrado
-    const animes = data.data.filter(a => a.rating !== "Rx"); // evitar contenido adulto
+    const animes = data.data.filter(a => a.rating !== "Rx");
     if (animes.length === 0) {
       card.innerHTML = "No se encontraron animes aptos para mostrar.";
       return;
@@ -49,5 +49,6 @@ async function cargarAnimeFiltrado() {
     card.innerHTML = "Error al buscar animes 😢";
   }
 }
+
 
 window.addEventListener('load', cargarAnimeFiltrado);
