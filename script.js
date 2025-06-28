@@ -3,8 +3,6 @@ async function cargarAnimeFiltrado() {
   const genero = document.getElementById("genero").value;
 
   const urlBase = "https://api.jikan.moe/v4/anime";
-
-  // Armar query params para la API, solo si no están vacíos
   const params = new URLSearchParams();
 
   if (tipo) params.append("type", tipo);
