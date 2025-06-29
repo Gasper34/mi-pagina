@@ -115,15 +115,15 @@ function resetearFiltros() {
 }
 
 window.addEventListener("load", () => {
-  // Slider de score
   const slider = document.getElementById("scoreMinimo");
   slider.addEventListener("input", () => mostrarScore(slider.value));
-  mostrarScore(slider.value); // Mostrar valor inicial
+  mostrarScore(slider.value);
 
-  // Botón de búsqueda
   const botonBuscar = document.getElementById("botonBuscar");
   botonBuscar.addEventListener("click", cargarAnimeFiltrado);
 
-  // Carga inicial
+  const botonReset = document.getElementById("botonReset");
+  botonReset.addEventListener("click", resetearFiltros);
+
   cargarAnimeFiltrado();
 });
