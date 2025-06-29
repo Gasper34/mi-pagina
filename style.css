@@ -5,7 +5,7 @@ body {
   background: linear-gradient(135deg, #2f80ed, #56ccf2);
   color: #fff;
   margin: 0;
-  padding: 2em;
+  padding: 1.2em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,37 +15,39 @@ body {
 
 h1 {
   font-weight: 600;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em; /* menos margen */
+  font-size: 1.8em;   /* más pequeño */
   text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
 
 #filtros {
   background: rgba(255, 255, 255, 0.15);
-  padding: 1.5em 2em;
+  padding: 1em 1.5em; /* menos padding */
   border-radius: 15px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2em;
+  gap: 0.8em; /* menos gap */
   justify-content: center;
-  max-width: 700px;
+  max-width: 600px; /* menos ancho */
+  width: 90%; /* adaptable */
   margin-bottom: 2em;
 }
 
 #filtros label {
   flex-basis: 100%;
   font-weight: 600;
-  margin-bottom: 0.3em;
+  margin-bottom: 0.2em; /* menos margen */
 }
 
 #filtros select {
-  padding: 0.5em 1em;
+  padding: 0.4em 1em; /* menos padding */
   border-radius: 8px;
   border: none;
-  font-size: 1em;
-  min-width: 140px;
+  font-size: 0.9em; /* tamaño más pequeño */
+  min-width: 120px; /* más pequeño */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -55,8 +57,8 @@ h1 {
 }
 
 button {
-  padding: 0.7em 1.5em;
-  font-size: 1em;
+  padding: 0.5em 1.2em; /* menos padding */
+  font-size: 0.9em; /* más pequeño */
   border-radius: 10px;
   border: none;
   background: linear-gradient(45deg, #ff416c, #ff4b2b);
@@ -65,8 +67,8 @@ button {
   font-weight: 600;
   box-shadow: 0 4px 15px rgba(255,75,43,0.6);
   transition: background 0.4s ease, transform 0.2s ease;
-  margin-top: 0.5em;
-  min-width: 140px;
+  margin-top: 0.4em; /* menos margen */
+  min-width: 120px; /* más pequeño */
 }
 
 button:hover {
@@ -78,8 +80,9 @@ button:hover {
 #anime-card {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  padding: 2em;
-  max-width: 600px;
+  padding: 1.2em; /* menos padding */
+  max-width: 500px; /* más pequeño */
+  width: 90%; /* adaptable */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   text-align: left;
   transition: transform 0.3s ease;
@@ -91,23 +94,41 @@ button:hover {
 
 #anime-card img {
   width: 100%;
-  border-radius: 15px;
-  margin: 1em 0;
+  border-radius: 10px; /* más pequeño */
+  margin: 0.8em 0; /* menos margen */
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 .mal-button {
   display: inline-block;
-  padding: 0.7em 1.2em;
+  padding: 0.5em 1em; /* menos padding */
   background-color: #0f52ba;
   color: white;
   text-decoration: none;
   border-radius: 12px;
   font-weight: 600;
   transition: background-color 0.3s ease;
-  margin-top: 1em;
+  margin-top: 0.8em;
+  font-size: 0.9em; /* más pequeño */
 }
 
 .mal-button:hover {
   background-color: #054a91;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5em;
+  }
+  #filtros select,
+  button,
+  .mal-button {
+    font-size: 0.8em;
+    min-width: 100px;
+  }
+  #anime-card {
+    max-width: 100%;
+    padding: 1em;
+  }
 }
