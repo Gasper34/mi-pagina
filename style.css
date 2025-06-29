@@ -1,11 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+:root {
+  --bg-color: linear-gradient(135deg, #f9f7f1, #efe6d6);
+  --text-color: #5a4a3c;
+  --card-bg: rgba(255, 255, 240, 0.9);
+  --filtros-bg: rgba(233, 221, 199, 0.85);
+  --button-bg: linear-gradient(45deg, #c49e65, #b47a31);
+  --button-hover-bg: linear-gradient(45deg, #b47a31, #c49e65);
+  --mal-bg: #876d4a;
+  --mal-hover-bg: #6b5737;
+}
+
+body.dark {
+  --bg-color: linear-gradient(135deg, #5a4a33, #4b3c28); /* café oscuro claro con degradado */
+  --text-color: #f0e9db; /* beige claro más brillante */
+  --card-bg: rgba(90, 74, 51, 0.85); /* café translúcido un poco más claro */
+  --filtros-bg: rgba(115, 98, 70, 0.7); /* café medio translúcido más claro */
+  --button-bg: linear-gradient(45deg, #b99a5a, #a38743); /* dorado cálido */
+  --button-hover-bg: linear-gradient(45deg, #a38743, #b99a5a); /* invertido para hover */
+  --mal-bg: #927a4a; /* café medio claro */
+  --mal-hover-bg: #7a6536; /* café un poco más oscuro */
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #2f80ed, #56ccf2);
-  color: #fff;
+  background: var(--bg-color);
+  color: var(--text-color);
   margin: 0;
-  padding: 1.2em;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,39 +37,41 @@ body {
 
 h1 {
   font-weight: 600;
-  margin-bottom: 1em; /* menos margen */
-  font-size: 1.8em;   /* más pequeño */
-  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  margin-bottom: 0.8em;
+  font-size: 1.5em;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 #filtros {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 1em 1.5em; /* menos padding */
-  border-radius: 15px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--filtros-bg);
+  padding: 0.8em 1.2em;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 173, 239, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.8em; /* menos gap */
+  gap: 0.6em;
   justify-content: center;
-  max-width: 600px; /* menos ancho */
-  width: 90%; /* adaptable */
-  margin-bottom: 2em;
+  max-width: 480px;
+  width: 95%;
+  margin-bottom: 1.5em;
 }
 
 #filtros label {
   flex-basis: 100%;
-  font-weight: 600;
-  margin-bottom: 0.2em; /* menos margen */
+  font-weight: 500;
+  margin-bottom: 0.2em;
+  font-size: 0.85em;
 }
 
 #filtros select {
-  padding: 0.4em 1em; /* menos padding */
-  border-radius: 8px;
+  padding: 0.3em 0.8em;
+  border-radius: 6px;
   border: none;
-  font-size: 0.9em; /* tamaño más pequeño */
-  min-width: 120px; /* más pequeño */
+  font-size: 0.85em;
+  min-width: 110px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -57,78 +81,135 @@ h1 {
 }
 
 button {
-  padding: 0.5em 1.2em; /* menos padding */
-  font-size: 0.9em; /* más pequeño */
+  padding: 0.5em 1em;
+  font-size: 0.85em;
   border-radius: 10px;
   border: none;
-  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  background: var(--button-bg);
   color: white;
   cursor: pointer;
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(255,75,43,0.6);
-  transition: background 0.4s ease, transform 0.2s ease;
-  margin-top: 0.4em; /* menos margen */
-  min-width: 120px; /* más pequeño */
+  box-shadow: 0 3px 10px rgba(30, 144, 255, 0.4);
+  transition: background 0.3s ease, transform 0.2s ease;
+  margin-top: 0.3em;
+  min-width: 100px;
 }
 
 button:hover {
-  background: linear-gradient(45deg, #ff4b2b, #ff416c);
+  background: var(--button-hover-bg);
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(255,75,43,0.8);
+  box-shadow: 0 5px 15px rgba(30, 144, 255, 0.6);
 }
 
 #anime-card {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 1.2em; /* menos padding */
-  max-width: 500px; /* más pequeño */
-  width: 90%; /* adaptable */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 1em;
+  max-width: 450px;
+  width: 95%;
+  box-shadow: 0 6px 20px rgba(0, 173, 239, 0.25);
   text-align: left;
   transition: transform 0.3s ease;
 }
 
 #anime-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-6px);
 }
 
 #anime-card img {
-  width: 100%;
-  border-radius: 10px; /* más pequeño */
-  margin: 0.8em 0; /* menos margen */
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  width: 60%;
+  max-width: 240px;
+  display: block;
+  margin: 0.6em auto;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 .mal-button {
   display: inline-block;
-  padding: 0.5em 1em; /* menos padding */
-  background-color: #0f52ba;
+  padding: 0.5em 1em;
+  background-color: var(--mal-bg);
   color: white;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 600;
   transition: background-color 0.3s ease;
-  margin-top: 0.8em;
-  font-size: 0.9em; /* más pequeño */
+  margin-top: 0.6em;
+  font-size: 0.85em;
 }
 
 .mal-button:hover {
-  background-color: #054a91;
+  background-color: var(--mal-hover-bg);
 }
 
-/* Media query para pantallas pequeñas */
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.5em;
+    font-size: 1.3em;
   }
+
   #filtros select,
   button,
   .mal-button {
     font-size: 0.8em;
-    min-width: 100px;
+    min-width: 90px;
   }
+
   #anime-card {
     max-width: 100%;
-    padding: 1em;
+    padding: 0.8em;
   }
+}
+
+#contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2em;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1100px;
+}
+
+#columna-filtros {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+}
+
+#columna-anime {
+  flex: 2 1 500px;
+}
+
+@media (max-width: 768px) {
+  #contenedor {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #columna-filtros,
+  #columna-anime {
+    width: 100%;
+    max-width: 95%;
+  }
+}
+
+#toggleTema {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  padding: 0.4em 0.6em;
+  font-size: 0.9em;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#toggleTema:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
 }

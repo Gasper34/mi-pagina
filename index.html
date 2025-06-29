@@ -2,52 +2,59 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <title>Anime del Día</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <button id="toggleTema">🌙</button>
   <h1>🎲 Anime Aleatorio del Día</h1>
 
-  <div id="filtros">
-    <label for="tipo">Tipo:</label>
-    <select id="tipo">
-      <option value="">Cualquiera</option>
-      <option value="tv">TV</option>
-      <option value="movie">Movie</option>
-      <option value="ova">OVA</option>
-      <option value="special">Special</option>
-      <option value="ona">ONA</option>
-      <option value="music">Music</option>
-    </select>
+  <div id="contenedor">
+    <div id="columna-filtros">
+      <div id="filtros">
+        <label for="tipo">Tipo:</label>
+        <select id="tipo">
+          <option value="">Cualquiera</option>
+          <option value="tv">TV</option>
+          <option value="movie">Movie</option>
+          <option value="ova">OVA</option>
+          <option value="special">Special</option>
+          <option value="ona">ONA</option>
+          <option value="music">Music</option>
+        </select>
 
-    <label for="popularidad">Popularidad:</label>
-    <select id="popularidad">
-      <option value="">Cualquiera</option>
-      <option value="top100">Top 100</option>
-      <option value="top1000">Top 1000</option>
-      <option value="masvisto">Más vistos</option>
-      <option value="recomendado">Populares recomendados</option>
-    </select>
+        <label for="popularidad">Popularidad:</label>
+        <select id="popularidad">
+          <option value="">Cualquiera</option>
+          <option value="top100">Top 100</option>
+          <option value="top1000">Top 1000</option>
+          <option value="masvisto">Más vistos</option>
+          <option value="recomendado">Populares recomendados</option>
+        </select>
 
-    <label for="genero">Género:</label>
-    <select id="genero">
-      <option value="">Cualquiera</option>
-      <option value="1">Acción</option>
-      <option value="2">Aventura</option>
-      <option value="4">Comedia</option>
-      <option value="8">Drama</option>
-      <option value="10">Fantasia</option>
-      <option value="22">Romance</option>
-      <option value="24">Sobrenatural</option>
-    </select>
+        <label for="genero">Género:</label>
+        <select id="genero">
+          <option value="">Cualquiera</option>
+          <option value="1">Acción</option>
+          <option value="2">Aventura</option>
+          <option value="4">Comedia</option>
+          <option value="8">Drama</option>
+          <option value="10">Fantasía</option>
+          <option value="22">Romance</option>
+          <option value="24">Sobrenatural</option>
+        </select>
 
-    <br /><br />
-    <button id="botonBuscar">Buscar Anime</button>
-    <button id="botonReset">🔄 Resetear Filtros</button>
+        <button id="botonBuscar">Buscar Anime</button>
+        <button id="botonReset">🔄 Resetear Filtros</button>
+      </div>
+    </div>
+
+    <div id="columna-anime">
+      <div id="anime-card" class="card">Cargando anime...</div>
+    </div>
   </div>
-
-  <div id="anime-card" class="card">Cargando anime...</div>
 
   <script src="script.js"></script>
 </body>

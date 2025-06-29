@@ -95,3 +95,21 @@ window.addEventListener("DOMContentLoaded", () => {
 
   cargarAnimeFiltrado();
 });
+
+const toggleTema = document.getElementById("toggleTema");
+
+toggleTema.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  // Guardar la preferencia en localStorage
+  const esDark = document.body.classList.contains("dark");
+  localStorage.setItem("tema", esDark ? "dark" : "light");
+});
+
+// Aplicar el tema guardado al cargar
+window.addEventListener("load", () => {
+  const temaGuardado = localStorage.getItem("tema");
+  if (temaGuardado === "dark") {
+    document.body.classList.add("dark");
+  }
+});
