@@ -60,3 +60,34 @@ button:hover {
 .mal-button:hover {
   background-color: #1a5ec8;
 }
+
+input[type="range"] {
+  width: 200px;
+  margin-left: 8px;
+}
+
+#valorScore {
+  font-weight: bold;
+  padding-left: 8px;
+  transition: color 0.3s ease;
+}
+
+#valorScore.bajo {
+  color: crimson;
+}
+#valorScore.medio {
+  color: goldenrod;
+}
+#valorScore.alto {
+  color: seagreen;
+}
+
+.mal-button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #2e51a2;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}

@@ -2,6 +2,11 @@ async function cargarAnimeFiltrado() {
   const tipo = document.getElementById("tipo").value;
   const genero = document.getElementById("genero").value;
   const popularidad = document.getElementById("popularidad").value;
+  const scoreMinimo = parseFloat(document.getElementById("scoreMinimo").value);
+
+  if (scoreMinimo > 0) {
+    params.append("min_score", scoreMinimo);
+  }
 
   const urlBase = "https://api.jikan.moe/v4/anime";
   const params = new URLSearchParams();
@@ -64,14 +69,51 @@ async function cargarAnimeFiltrado() {
     card.innerHTML = `
       <h2>${aleatorio.title}</h2>
       <img src="${aleatorio.images.jpg.image_url}" alt="${aleatorio.title}">
-      <p><strong>Géneros:</strong> ${aleatorio.genres.map(g => g.name).join(", ")}</p>
-      <p><strong>Puntaje:</strong> ${aleatorio.score ?? "N/A"}</p>
+      <p><strong>Géneros:</strong> ${aleatorio.genres
+        .map((g) => g.name)
+        .join(", ")}</p>
+      <p><strong>Puntaje:</strong> <span style="color:${
+        aleatorio.score >= 8
+          ? "seagreen"
+          : aleatorio.score >= 5
+          ? "goldenrod"
+          : "crimson"
+      }; font-weight:bold;">
+      ${aleatorio.score ?? "N/A"}
+      </span></p>
+
       <p>${aleatorio.synopsis?.substring(0, 400) ?? "Sin sinopsis."}...</p>
-      <a href="${aleatorio.url}" target="_blank" rel="noopener noreferrer" class="mal-button">Ver en MyAnimeList</a>
+      <a href="${
+        aleatorio.url
+      }" target="_blank" rel="noopener noreferrer" class="mal-button">Ver en MyAnimeList</a>
     `;
   } catch (error) {
     card.innerHTML = "Error al buscar animes 😢";
   }
+}
+
+function mostrarScore(valor) {
+  const span = document.getElementById("valorScore");
+  span.textContent = valor;
+
+  span.classList.remove("bajo", "medio", "alto");
+
+  if (valor < 5) {
+    span.classList.add("bajo");
+  } else if (valor < 8) {
+    span.classList.add("medio");
+  } else {
+    span.classList.add("alto");
+  }
+}
+
+function resetearFiltros() {
+  document.getElementById("tipo").value = "";
+  document.getElementById("genero").value = "";
+  document.getElementById("popularidad").value = "";
+  document.getElementById("scoreMinimo").value = 0;
+  mostrarScore(0);
+  cargarAnimeFiltrado();
 }
 
 window.addEventListener('load', cargarAnimeFiltrado);
