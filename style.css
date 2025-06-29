@@ -1,95 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #1b1b1b, #000);
-  color: #f0f0f0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #2f80ed, #56ccf2);
+  color: #fff;
   margin: 0;
   padding: 2em;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-attachment: fixed;
 }
 
 h1 {
-  margin-bottom: 1em;
-  font-size: 2.2em;
+  font-weight: 600;
+  margin-bottom: 1.5em;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+#filtros {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1.5em 2em;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2em;
+  justify-content: center;
+  max-width: 700px;
+  margin-bottom: 2em;
+}
+
+#filtros label {
+  flex-basis: 100%;
+  font-weight: 600;
+  margin-bottom: 0.3em;
+}
+
+#filtros select {
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  border: none;
+  font-size: 1em;
+  min-width: 140px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#filtros select:hover {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 button {
   padding: 0.7em 1.5em;
-  margin-top: 1em;
   font-size: 1em;
-  border: none;
   border-radius: 10px;
-  background: #ff4b4b;
+  border: none;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
   color: white;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255,75,43,0.6);
+  transition: background 0.4s ease, transform 0.2s ease;
+  margin-top: 0.5em;
+  min-width: 140px;
 }
 
 button:hover {
-  background: #ff6666;
+  background: linear-gradient(45deg, #ff4b2b, #ff416c);
   transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255,75,43,0.8);
 }
 
-#filtros {
-  margin-bottom: 2em;
-}
-
-#filtros label,
-#filtros select,
-#filtros input,
-#filtros span {
-  display: inline-block;
-  margin: 0.5em 0.3em;
-}
-
-input[type="range"] {
-  width: 200px;
-  vertical-align: middle;
-}
-
-#valorScore {
-  font-weight: bold;
-  padding-left: 8px;
-  transition: color 0.3s ease;
-}
-
-#valorScore.bajo {
-  color: crimson;
-}
-#valorScore.medio {
-  color: goldenrod;
-}
-#valorScore.alto {
-  color: seagreen;
-}
-
-.card {
-  background-color: #2a2a2a;
-  padding: 1.5em;
-  border-radius: 15px;
+#anime-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2em;
   max-width: 600px;
-  margin: 0 auto 2em;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-  transition: opacity 0.5s ease-in-out;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  text-align: left;
+  transition: transform 0.3s ease;
 }
 
-.card img {
-  max-width: 100%;
-  border-radius: 10px;
+#anime-card:hover {
+  transform: translateY(-10px);
+}
+
+#anime-card img {
+  width: 100%;
+  border-radius: 15px;
   margin: 1em 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 .mal-button {
   display: inline-block;
-  margin-top: 8px;
-  padding: 6px 12px;
-  background-color: #2e51a2;
+  padding: 0.7em 1.2em;
+  background-color: #0f52ba;
   color: white;
   text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
+  border-radius: 12px;
+  font-weight: 600;
   transition: background-color 0.3s ease;
+  margin-top: 1em;
 }
 
 .mal-button:hover {
-  background-color: #1a5ec8;
+  background-color: #054a91;
 }
