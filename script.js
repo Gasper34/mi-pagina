@@ -112,8 +112,17 @@ function resetearFiltros() {
   document.getElementById("genero").value = "";
   document.getElementById("popularidad").value = "";
   document.getElementById("scoreMinimo").value = 0;
-  mostrarScore(0);
-  cargarAnimeFiltrado();
+
+  mostrarScore(0);             // Actualizar el texto y color
+  cargarAnimeFiltrado();       // Recargar anime
 }
+
+// Conectamos el evento al slider apenas carga la página
+window.addEventListener("load", () => {
+  const slider = document.getElementById("scoreMinimo");
+  slider.addEventListener("input", () => mostrarScore(slider.value));
+  mostrarScore(slider.value); // Mostrar el valor inicial
+  cargarAnimeFiltrado();      // Cargar el primer anime al iniciar
+});
 
 window.addEventListener('load', cargarAnimeFiltrado);
