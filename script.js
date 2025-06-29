@@ -2,16 +2,13 @@ async function cargarAnimeFiltrado() {
   const tipo = document.getElementById("tipo").value;
   const genero = document.getElementById("genero").value;
   const popularidad = document.getElementById("popularidad").value;
-  const scoreMinimo = parseFloat(document.getElementById("scoreMinimo").value);
 
   const urlBase = "https://api.jikan.moe/v4/anime";
   const params = new URLSearchParams();
 
-  // Filtros básicos
   if (tipo) params.append("type", tipo);
   if (genero) params.append("genres", genero);
 
-  // Lógica de popularidad
   if (popularidad === "masvisto") {
     params.append("order_by", "popularity");
     params.append("sort", "desc");
@@ -48,12 +45,9 @@ async function cargarAnimeFiltrado() {
       return;
     }
 
-    // Filtrar resultados con score >= scoreMinimo, sin contenido adulto, y con imagen
+    // Sin filtro de score, solo filtro de rating y existencia de imagen
     const animes = data.data.filter(
-      (a) =>
-        a.rating !== "Rx" &&
-        a.images?.jpg?.image_url &&
-        (a.score ?? 0) >= scoreMinimo
+      (a) => a.rating !== "Rx" && a.images?.jpg?.image_url
     );
 
     if (animes.length === 0) {
@@ -89,41 +83,17 @@ async function cargarAnimeFiltrado() {
   }
 }
 
-function mostrarScore(valor) {
-  const span = document.getElementById("valorScore");
-  span.textContent = valor;
-
-  span.classList.remove("bajo", "medio", "alto");
-
-  if (valor < 5) {
-    span.classList.add("bajo");
-  } else if (valor < 8) {
-    span.classList.add("medio");
-  } else {
-    span.classList.add("alto");
-  }
-}
-
 function resetearFiltros() {
   document.getElementById("tipo").value = "";
   document.getElementById("genero").value = "";
   document.getElementById("popularidad").value = "";
-  document.getElementById("scoreMinimo").value = 0;
 
-  mostrarScore(0); // Actualizar el texto y color
-  cargarAnimeFiltrado(); // Recargar anime
+  cargarAnimeFiltrado();
 }
 
 window.addEventListener("load", () => {
-  const slider = document.getElementById("scoreMinimo");
-  slider.addEventListener("input", () => mostrarScore(slider.value));
-  mostrarScore(slider.value);
-
-  const botonBuscar = document.getElementById("botonBuscar");
-  botonBuscar.addEventListener("click", cargarAnimeFiltrado);
-
-  const botonReset = document.getElementById("botonReset");
-  botonReset.addEventListener("click", resetearFiltros);
+  document.getElementById("botonBuscar").addEventListener("click", cargarAnimeFiltrado);
+  document.getElementById("botonReset").addEventListener("click", resetearFiltros);
 
   cargarAnimeFiltrado();
 });
