@@ -11,11 +11,6 @@ async function cargarAnimeFiltrado() {
   if (tipo) params.append("type", tipo);
   if (genero) params.append("genres", genero);
 
-  // Filtro puntaje mínimo — debe ir DESPUÉS de crear params
-  if (scoreMinimo > 0) {
-    params.append("min_score", scoreMinimo);
-  }
-
   // Lógica de popularidad
   if (popularidad === "masvisto") {
     params.append("order_by", "popularity");
@@ -25,10 +20,8 @@ async function cargarAnimeFiltrado() {
     params.append("order_by", "popularity");
     params.append("sort", "desc");
     params.append("limit", 25);
-    params.append("min_score", 7); // esta línea está bien, puede coexistir con filtro personalizado
-    params.append("page", Math.floor(Math.random() * 10) + 1); // páginas 1–10
+    params.append("page", Math.floor(Math.random() * 10) + 1);
   } else {
-    // Top 100 o Top 1000 o sin filtro de popularidad
     params.append("order_by", "score");
     params.append("sort", "desc");
     params.append("limit", 25);
@@ -55,9 +48,12 @@ async function cargarAnimeFiltrado() {
       return;
     }
 
-    // Filtro final: evitar Rx y sin imagen
+    // Filtrar resultados con score >= scoreMinimo, sin contenido adulto, y con imagen
     const animes = data.data.filter(
-      (a) => a.rating !== "Rx" && a.images?.jpg?.image_url
+      (a) =>
+        a.rating !== "Rx" &&
+        a.images?.jpg?.image_url &&
+        (a.score ?? 0) >= scoreMinimo
     );
 
     if (animes.length === 0) {
