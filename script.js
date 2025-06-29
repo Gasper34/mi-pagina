@@ -86,9 +86,12 @@ function resetearFiltros() {
   cargarAnimeFiltrado();
 }
 
-window.addEventListener("load", () => {
-  document.getElementById("botonBuscar").addEventListener("click", cargarAnimeFiltrado);
-  document.getElementById("botonReset").addEventListener("click", resetearFiltros);
+window.addEventListener("DOMContentLoaded", () => {
+  const botonBuscar = document.getElementById("botonBuscar");
+  const botonReset = document.getElementById("botonReset");
+
+  botonBuscar.addEventListener("click", cargarAnimeFiltrado);
+  botonReset.addEventListener("click", resetearFiltros);
 
   cargarAnimeFiltrado();
 });
