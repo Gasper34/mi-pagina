@@ -12,16 +12,14 @@ async function cargarAnimeFiltrado() {
   if (popularidad === "masvisto") {
     params.append("order_by", "popularity");
     params.append("sort", "desc");
-    params.append("limit", 25);
+    // No 'limit' param here
   } else if (popularidad === "recomendado") {
     params.append("order_by", "popularity");
     params.append("sort", "desc");
-    params.append("limit", 25);
     params.append("page", Math.floor(Math.random() * 10) + 1);
   } else {
     params.append("order_by", "score");
     params.append("sort", "desc");
-    params.append("limit", 25);
 
     if (popularidad === "top100") {
       params.append("page", Math.floor(Math.random() * 4) + 1);
@@ -38,6 +36,7 @@ async function cargarAnimeFiltrado() {
 
   try {
     const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
 
     if (!data.data || data.data.length === 0) {
@@ -45,7 +44,6 @@ async function cargarAnimeFiltrado() {
       return;
     }
 
-    // Sin filtro de score, solo filtro de rating y existencia de imagen
     const animes = data.data.filter(
       (a) => a.rating !== "Rx" && a.images?.jpg?.image_url
     );
@@ -60,9 +58,7 @@ async function cargarAnimeFiltrado() {
     card.innerHTML = `
       <h2>${aleatorio.title}</h2>
       <img src="${aleatorio.images.jpg.image_url}" alt="${aleatorio.title}">
-      <p><strong>Géneros:</strong> ${aleatorio.genres
-        .map((g) => g.name)
-        .join(", ")}</p>
+      <p><strong>Géneros:</strong> ${aleatorio.genres.map((g) => g.name).join(", ")}</p>
       <p><strong>Puntaje:</strong> <span style="color:${
         aleatorio.score >= 8
           ? "seagreen"
@@ -74,12 +70,11 @@ async function cargarAnimeFiltrado() {
       </span></p>
 
       <p>${aleatorio.synopsis?.substring(0, 400) ?? "Sin sinopsis."}...</p>
-      <a href="${
-        aleatorio.url
-      }" target="_blank" rel="noopener noreferrer" class="mal-button">Ver en MyAnimeList</a>
+      <a href="${aleatorio.url}" target="_blank" rel="noopener noreferrer" class="mal-button">Ver en MyAnimeList</a>
     `;
   } catch (error) {
-    card.innerHTML = "Error al buscar animes 😢";
+    card.innerHTML = "Error al buscar animes 😢<br>" + error.message;
+    console.error(error);
   }
 }
 
