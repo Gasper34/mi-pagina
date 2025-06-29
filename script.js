@@ -1,6 +1,7 @@
 async function cargarAnimeFiltrado() {
   const tipo = document.getElementById("tipo").value;
   const genero = document.getElementById("genero").value;
+  const popularidad = document.getElementById("popularidad").value;
 
   const urlBase = "https://api.jikan.moe/v4/anime";
   const params = new URLSearchParams();
@@ -8,12 +9,26 @@ async function cargarAnimeFiltrado() {
   if (tipo) params.append("type", tipo);
   if (genero) params.append("genres", genero);
 
-  params.append("order_by", "popularity");
-  params.append("sort", "desc");
-  params.append("limit", 25);
+  if (popularidad === "masvisto") {
+    params.append("order_by", "popularity");
+    params.append("sort", "desc");
+    params.append("limit", 25);
+  } else {
+    params.append("order_by", "score");
+    params.append("sort", "desc");
+    params.append("limit", 25);
+
+    // Simular top 100 o 1000 eligiendo páginas según el filtro
+    if (popularidad === "top100") {
+      params.append("page", Math.floor(Math.random() * 4) + 1); // páginas 1 a 4 (25x4 = 100)
+    } else if (popularidad === "top1000") {
+      params.append("page", Math.floor(Math.random() * 40) + 1); // páginas 1 a 40
+    } else {
+      params.append("page", Math.floor(Math.random() * 20) + 1); // por defecto entre top 500
+    }
+  }
 
   const url = `${urlBase}?${params.toString()}`;
-
   const card = document.getElementById("anime-card");
   card.innerHTML = "Buscando animes...";
 
@@ -26,7 +41,7 @@ async function cargarAnimeFiltrado() {
       return;
     }
 
-    const animes = data.data.filter(a => a.rating !== "Rx");
+    const animes = data.data.filter(a => a.rating !== "Rx" && a.images?.jpg?.image_url);
     if (animes.length === 0) {
       card.innerHTML = "No se encontraron animes aptos para mostrar.";
       return;
@@ -47,6 +62,5 @@ async function cargarAnimeFiltrado() {
     card.innerHTML = "Error al buscar animes 😢";
   }
 }
-
 
 window.addEventListener('load', cargarAnimeFiltrado);
