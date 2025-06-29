@@ -4,16 +4,17 @@ async function cargarAnimeFiltrado() {
   const popularidad = document.getElementById("popularidad").value;
   const scoreMinimo = parseFloat(document.getElementById("scoreMinimo").value);
 
-  if (scoreMinimo > 0) {
-    params.append("min_score", scoreMinimo);
-  }
-
   const urlBase = "https://api.jikan.moe/v4/anime";
   const params = new URLSearchParams();
 
   // Filtros básicos
   if (tipo) params.append("type", tipo);
   if (genero) params.append("genres", genero);
+
+  // Filtro puntaje mínimo — debe ir DESPUÉS de crear params
+  if (scoreMinimo > 0) {
+    params.append("min_score", scoreMinimo);
+  }
 
   // Lógica de popularidad
   if (popularidad === "masvisto") {
@@ -24,7 +25,7 @@ async function cargarAnimeFiltrado() {
     params.append("order_by", "popularity");
     params.append("sort", "desc");
     params.append("limit", 25);
-    params.append("min_score", 7);
+    params.append("min_score", 7); // esta línea está bien, puede coexistir con filtro personalizado
     params.append("page", Math.floor(Math.random() * 10) + 1); // páginas 1–10
   } else {
     // Top 100 o Top 1000 o sin filtro de popularidad
@@ -56,7 +57,7 @@ async function cargarAnimeFiltrado() {
 
     // Filtro final: evitar Rx y sin imagen
     const animes = data.data.filter(
-      a => a.rating !== "Rx" && a.images?.jpg?.image_url
+      (a) => a.rating !== "Rx" && a.images?.jpg?.image_url
     );
 
     if (animes.length === 0) {
@@ -113,11 +114,10 @@ function resetearFiltros() {
   document.getElementById("popularidad").value = "";
   document.getElementById("scoreMinimo").value = 0;
 
-  mostrarScore(0);             // Actualizar el texto y color
-  cargarAnimeFiltrado();       // Recargar anime
+  mostrarScore(0); // Actualizar el texto y color
+  cargarAnimeFiltrado(); // Recargar anime
 }
 
-// Cuando se carga la página...
 window.addEventListener("load", () => {
   // Slider de score
   const slider = document.getElementById("scoreMinimo");
@@ -131,6 +131,3 @@ window.addEventListener("load", () => {
   // Carga inicial
   cargarAnimeFiltrado();
 });
-
-
-window.addEventListener('load', cargarAnimeFiltrado);
