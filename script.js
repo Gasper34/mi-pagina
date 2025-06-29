@@ -117,12 +117,20 @@ function resetearFiltros() {
   cargarAnimeFiltrado();       // Recargar anime
 }
 
-// Conectamos el evento al slider apenas carga la página
+// Cuando se carga la página...
 window.addEventListener("load", () => {
+  // Slider de score
   const slider = document.getElementById("scoreMinimo");
   slider.addEventListener("input", () => mostrarScore(slider.value));
-  mostrarScore(slider.value); // Mostrar el valor inicial
-  cargarAnimeFiltrado();      // Cargar el primer anime al iniciar
+  mostrarScore(slider.value); // Mostrar valor inicial
+
+  // Botón de búsqueda
+  const botonBuscar = document.getElementById("botonBuscar");
+  botonBuscar.addEventListener("click", cargarAnimeFiltrado);
+
+  // Carga inicial
+  cargarAnimeFiltrado();
 });
+
 
 window.addEventListener('load', cargarAnimeFiltrado);
